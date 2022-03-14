@@ -7,6 +7,6 @@ const second = readFileSync("./content/second.txt", "utf-8");
 // flag: "a" appends the data to the file without overwritting it. 
 writeFileSync(
   "./content/result-sync.txt",
-  `Template string ${first} and ${second}`,
+  `Template string sync ${first} and ${second}`,
   { flag: "a" }
 );

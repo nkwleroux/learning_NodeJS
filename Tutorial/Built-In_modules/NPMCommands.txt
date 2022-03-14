@@ -1,0 +1,15 @@
+npm - global command, comes with node
+npm --v (displays the version)
+
+local dependency (install only in directory)
+npm i <packageName>
+
+global dependency (install on computer)
+npm install -g <packageName>
+
+dev dependency (not for production)
+npm i <packageName> -D
+
+package.json - manifest file (stores important info)
+npm init (creats package.json in root)
+npm init -y (sets everything to default)

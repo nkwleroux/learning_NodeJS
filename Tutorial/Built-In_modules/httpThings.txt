@@ -1,0 +1,4 @@
+//Get - read data
+//Post - insert data
+//Put - update data
+//Delete - delete data

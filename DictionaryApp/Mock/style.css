@@ -1,0 +1,153 @@
+/* Import Google Font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body{
+  display: flex;
+  align-items: top;
+  justify-content: center;
+  /* min-height: 100vh; */
+  background: #e8e8e4;
+}
+::selection{
+  color: #fff;
+  background: #2ca8f0;
+}
+.wrapper{
+  width: 25rem;
+    border-radius: .3rem;
+  background: #fff;
+  padding: 2rem  2rem;
+	/* box-shadow: .3rem .3rem 1.2rem rgba(0, 0, 0, 0.05); */
+}
+.wrapper header{
+  font-size: 1.7rem;
+  font-weight: 500;
+  text-align: center;
+}
+.wrapper .search{
+  position: relative;
+  margin: 2rem 0 3rem;
+}
+.search input{
+  height: 3rem;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  border-radius: .2rem;
+    padding: 0 2.5rem;
+    border: .1rem solid #e8e8e4;
+}
+.search input:focus{
+  padding: 0 2.5rem;
+  border: .15rem solid #d8e2dc;
+}
+.search input::placeholder{
+  color: #e8e8e4;
+}
+
+.search :where(i, span){
+  position: absolute;
+  top: 50%;
+  color: #e8e8e4;
+  transform: translateY(-50%);
+}
+.search i{
+  left: 1rem;
+  pointer-events: none;
+  font-size: 1rem;
+}
+.search input:focus ~ i{
+  color: #d8e2dc;
+}
+.search span{
+  right: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  display:none;
+}
+.search input:valid ~ span{
+  display: block;
+}
+.wrapper .info-text{
+  font-size: .9rem;
+  color: #9a9a9a;
+  margin: -0.1rem 0 -0.6rem;
+}
+.wrapper.active .info-text{
+  display: none;
+}
+.info-text span{
+  font-weight: 500;
+}
+.wrapper ul{
+  height: 0;
+  opacity: 0;
+  padding-right: .1rem;
+  overflow-y: hidden;
+  transition: all 0.2s ease;
+}
+.wrapper.active ul{
+  opacity: 1;
+  height: 18rem;
+}
+.wrapper ul li{
+  display: flex;
+  list-style: none;
+  margin-bottom: .9rem;
+  align-items: center;
+  padding-bottom: 1rem;
+  border-bottom: .1rem solid #ccc;
+  /* justify-content: space-between; */
+}
+ul li:last-child{
+  margin-bottom: 0;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+ul .word p{
+  font-size: 1.2rem;
+  color: #989898;
+}
+ul .word span{
+  font-size: .9rem;
+  color: #b8b8b8;
+}
+ul .word i{
+  color: #b8b8b8;
+  font-size: 1rem;
+  cursor: pointer;
+}
+ul .content{
+  max-height: 15rem;
+  overflow-y: auto;
+}
+ul .content::-webkit-scrollbar{
+  width: 0rem;
+}
+.content li .details{
+  padding-left: .8rem;
+  border-radius: 0.2rem 0 0 0.2rem;
+  border-left: 0.3rem solid  #e8e8e4;
+}
+.content li p{
+  font-size: 1rem;
+  font-weight: 500;  
+}
+.content li span{
+  font-size: .9rem;
+  color: #7e7e7e; 
+}
+.content .synonyms .list{
+  display: flex;
+  flex-wrap: wrap;
+}
+.content .synonyms span{
+  cursor: pointer;
+  margin-right: .25rem;
+  text-decoration: underline;
+}

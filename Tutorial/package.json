@@ -1,0 +1,24 @@
+{
+  "name": "learning_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node Patterns/app.js",
+    "dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkwleroux/learning_NodeJS.git"
+  },
+  "author": "Nic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nkwleroux/learning_NodeJS/issues"
+  },
+  "homepage": "https://github.com/nkwleroux/learning_NodeJS#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

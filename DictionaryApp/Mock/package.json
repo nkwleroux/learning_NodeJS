@@ -1,0 +1,24 @@
+{
+  "name": "mock",
+  "version": "1.0.0",
+  "description": "mock version of Dictionary app",
+  "main": "app.js",
+  "scripts": {
+    "start":"node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkwleroux/learning_NodeJS.git"
+  },
+  "author": "Nic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nkwleroux/learning_NodeJS/issues"
+  },
+  "homepage": "https://github.com/nkwleroux/learning_NodeJS#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

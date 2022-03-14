@@ -1,0 +1,26 @@
+{
+  "name": "starterapp",
+  "version": "1.0.0",
+  "description": "firstServerApp",
+  "main": "main.js",
+  "scripts": {
+    "dev": "nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nkwleroux/learning_NodeJS.git"
+  },
+  "author": "Nic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nkwleroux/learning_NodeJS/issues"
+  },
+  "homepage": "https://github.com/nkwleroux/learning_NodeJS#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
