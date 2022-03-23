@@ -1,66 +1,62 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- links -->
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- links -->
+    <link rel="stylesheet" href="./style.css" />
 
     <!-- CDN links for icon -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
- 
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
     <title>English Dictionary</title>
-
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="wrapper">
-        <header>English Dictionary</header>
-        <div class="search">
-          <input type="text" placeholder="Search a word" required spellcheck="false">
-          <i class="fas fa-search"></i>
-          <span class="material-icons">close</span>
-        </div>
-        <p class="info-text"></p>
-        <ul>
-          <li class="word">
-            <div class="details">
-              <p>__</p>
-              <span>_ _</span>
-            </div>
-            <i class="fas fa-volume-up"></i>
-          </li>
-          <div class="content">
-            <li class="meanings">
-              <div class="details">
-                <p>Meanings</p>
-                <div class="list"></div>
-                <span>___</span>
-              </div>
-            </li>
-            <li class="examples">
-              <div class="details">
-                <p>Examples</p>
-                <div class="list"></div>
-                <span>___</span>
-              </div>
-            </li>
-            <li class="synonyms">
-              <div class="details">
-                <p>Synonyms</p>
-                <div class="list"></div>
-                <span>___</span>
-              </div>
-            </li>
-          </div>
-        </ul>
+      <header>English Dictionary</header>
+      <div class="search">
+        <input
+          type="text"
+          placeholder="Search a word"
+          required
+          spellcheck="true"
+        />
+        <i class="fas fa-search"></i>
+        <span class="material-icons">close</span>
       </div>
-  
-      <script src="./api.js"></script>
-  
-    </body>
-  </html>
-  
+      <p class="info-text"></p>
+      <ul>
+        <li class="word">
+          <div class="details">
+            <strong>__</strong>
+            <span>_ _</span>
+          </div>
+          <i class="fas fa-volume-up"></i>
+        </li>
+        <div class="content">
+          <li class="wordsList">
+            <div class="list"></div>
+          </li>
+          <li class="synonyms">
+            <div class="details">
+              <p>Synonyms</p>
+              <div class="list"></div>
+              <span>___</span>
+            </div>
+          </li>
+        </div>
+      </ul>
+    </div>
+
+    <script src="./api.js"></script>
+  </body>
+</html>

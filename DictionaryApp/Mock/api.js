@@ -5,9 +5,13 @@ const infoText = wrapper.querySelector(".info-text");
 const removeIcon = wrapper.querySelector(".search span");
 let audio;
 
-const meanings = wrapper.querySelector(".meanings .list");
-const example = wrapper.querySelector(".examples .list");
+const wordsList = wrapper.querySelector(".wordsList .list");
 const synonyms = wrapper.querySelector(".synonyms .list");
+
+//debug (calls onLoad + my own funciton)
+document.addEventListener("DOMContentLoaded", function () {
+  fetchApi("read");
+});
 
 function data(result, word) {
   if (result.title) {
@@ -16,7 +20,9 @@ function data(result, word) {
     wrapper.classList.add("active");
 
     //Word
-    document.querySelector(".word p").innerText = result[0].word;
+    let wordSearched = result[0].word.replace(/^\w/, (c) => c.toUpperCase());
+    document.querySelector(".word strong").innerText = wordSearched;
+    console.log(`${wordSearched}`);
 
     //Phonetics
     let phontetics = "";
@@ -25,30 +31,20 @@ function data(result, word) {
     }
     document.querySelector(".word span").innerText = phontetics;
 
-    //Meanings
-    meanings.innerHTML = "";
-    document.querySelector(".meanings .details span").innerText = "";
+    //Words
+    wordsList.innerHTML = "";
     let definitions = result[0].meanings[0].definitions;
     let tag;
     for (let index = 0; index < definitions.length; index++) {
-      tag = `<span> ${index + 1}. ${definitions[index].definition}</span>`;
-      meanings.insertAdjacentHTML("beforeend", tag);
+      tag = `<li>
+        <p> ${index + 1}. ${definitions[index].definition}</p>
+      `;
       if (definitions[index].example != undefined) {
-        tag = `<span> ${index + 1}. (Example) ${
-          definitions[index].example
-        }</span>`;
-        meanings.insertAdjacentHTML("beforeend", tag);
+        tag += `<span> Example: ${definitions[index].example}</span>`;
       }
+      tag += `</li>`;
+      wordsList.insertAdjacentHTML("beforeend", tag);
     }
-
-    //Examples
-    // example.innerHTML = "";
-    // let examples = result[0].meanings[0].examples;
-    // for (index = 0; index < examples.length; index++) {
-    //   let tag = `<span> ${index+1}. ${examples[index].example}</span>`;
-    //   example.insertAdjacentHTML("beforeend", tag);
-    //   console.log(`${examples[index].example}`);
-    // }
   }
 }
 
@@ -84,9 +80,9 @@ searchInput.addEventListener("keyup", (e) => {
   }
 });
 
+//TODO Audio doesn't work
 volume.addEventListener("click", () => {
   volume.style.color = "#4D59FB";
-  console.log("TODO - Audio doesn't work");
   // audio.play();
   setTimeout(() => {
     volume.style.color = "#999";

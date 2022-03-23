@@ -31,7 +31,7 @@ body {
 }
 .wrapper .search {
   position: relative;
-  margin: 2rem 0 3rem;
+  margin: 2rem 0 1rem;
 }
 .search input {
   height: 3rem;
@@ -93,7 +93,7 @@ body {
 }
 .wrapper.active ul {
   opacity: 1;
-  height: 18rem;
+  height: fit-content;
 }
 .wrapper ul li {
   display: flex;
@@ -109,12 +109,18 @@ ul li:last-child {
   border-bottom: 0;
   padding-bottom: 0;
 }
-ul .word p {
-  font-size: 1.2rem;
+/* ul .word p {
+  font-size: 2rem;
+  color: #989898;
+} */
+
+ul .word strong {
+  font-size: 2rem;
   color: #989898;
 }
+
 ul .word span {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #b8b8b8;
 }
 ul .word i {
@@ -143,20 +149,21 @@ ul .content::-webkit-scrollbar {
   color: #7e7e7e;
 }
 
-.content .meanings .details .list span {
+.content .wordsList .list li{
   display: block;
-  margin: 10px 0;
+  margin: 20px 0;
 }
 
-.content .examples .details .list span {
-  display: block;
-  margin: 10px 0;
+.content .wordsList .list li span{
+  /* margin: 20px 0; */
+  padding-left: 2rem;
 }
 
 .content .synonyms .list {
   display: flex;
   flex-wrap: wrap;
 }
+
 .content .synonyms span {
   cursor: pointer;
   margin-right: 0.25rem;
