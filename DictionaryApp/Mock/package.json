@@ -4,7 +4,7 @@
   "description": "mock version of Dictionary app",
   "main": "app.js",
   "scripts": {
-    "start":"node app.js",
+    "start": "node app.js",
     "dev": "nodemon --watch . app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/nkwleroux/learning_NodeJS#readme",
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "express": "^4.17.3"
   }
 }

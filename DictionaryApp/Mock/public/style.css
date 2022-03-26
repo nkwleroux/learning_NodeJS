@@ -104,15 +104,17 @@ body {
   border-bottom: 0.1rem solid #ccc;
   justify-content: space-between;
 }
+
 ul li:last-child {
   margin-bottom: 0;
   border-bottom: 0;
   padding-bottom: 0;
 }
-/* ul .word p {
-  font-size: 2rem;
-  color: #989898;
-} */
+
+ul div li.wordsList{
+  
+  padding-bottom: 0;
+}
 
 ul .word strong {
   font-size: 2rem;
@@ -159,12 +161,12 @@ ul .content::-webkit-scrollbar {
   padding-left: 2rem;
 }
 
-.content .synonyms .list {
+.content .synonyms .list, .content .antonyms .list {
   display: flex;
   flex-wrap: wrap;
 }
 
-.content .synonyms span {
+.content .synonyms span, .content .antonyms span {
   cursor: pointer;
   margin-right: 0.25rem;
   text-decoration: underline;
