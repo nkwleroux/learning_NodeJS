@@ -21,46 +21,53 @@
     <title>English Dictionary</title>
   </head>
   <body>
-    <div class="wrapper">
-      <header>English Dictionary</header>
-      <div class="search">
-        <input
-          type="text"
-          placeholder="Search a word"
-          required
-          spellcheck="true"
-        />
-        <i class="fas fa-search"></i>
-        <span class="material-icons">close</span>
-      </div>
-      <p class="info-text"></p>
-      <ul>
-        <li class="word">
-          <div class="details">
-            <strong>__</strong>
-            <span>_ _</span>
-          </div>
-          <i class="fas fa-volume-up"></i>
-        </li>
-        <div class="content">
-          <li class="wordsList">
-            <div class="list"></div>
-          </li>
-          <li class="synonyms">
-            <div class="details">
-              <p>Synonyms</p>
-              <div class="list"></div>
-            </div>
-          </li>
-          <li class="antonyms">
-            <div class="details">
-              <p>antonyms</p>
-              <div class="list"></div>
-            </div>
-          </li>
+    <div class="contentWrapper">
+      <div class="wrapper">
+        <header>English Dictionary</header>
+        <div class="search">
+          <input
+            type="text"
+            placeholder="Search a word"
+            required
+            spellcheck="true"
+          />
+          <i class="fas fa-search"></i>
+          <span class="material-icons">close</span>
         </div>
-      </ul>
+        <p class="info-text"></p>
+        <ul>
+          <li class="word">
+            <div class="details">
+              <strong>__</strong>
+              <span>_ _</span>
+            </div>
+            <i class="fas fa-volume-up"></i>
+          </li>
+          <div class="content">
+            <li class="wordsList">
+              <div class="list"></div>
+            </li>
+            <li class="synonyms">
+              <div class="details">
+                <p>Synonyms</p>
+                <div class="list"></div>
+              </div>
+            </li>
+            <li class="antonyms">
+              <div class="details">
+                <p>antonyms</p>
+                <div class="list"></div>
+              </div>
+            </li>
+          </div>
+        </ul>
+      </div>
+      <div class="sidebar">
+        <header>Words</header>
+        <div class="list"></div>
+      </div>
     </div>
+    
 
     <script src="./api.js"></script>
   </body>
