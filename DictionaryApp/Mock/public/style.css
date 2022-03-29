@@ -6,6 +6,7 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+
 body {
   display: flex;
   align-items: center;
@@ -15,13 +16,14 @@ body {
 }
 /* not necessary */
 .contentWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
   background: #e8e8e4;
-  width: 75rem;
-  max-height:30rem;
+  min-width: 75rem;
+  width: auto;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: auto;
+  grid-template-areas: "main sidebar";
+  height: max-content;
 }
 
 ::selection {
@@ -34,7 +36,8 @@ body {
   background: #fff;
   padding: 2rem 2rem;
   box-shadow: 0.3rem 0.3rem 1.2rem rgba(0, 0, 0, 0.05);
-  height: auto;
+  height: fit-content;
+  grid-area: main;
 }
 header {
   font-size: 1.7rem;
@@ -123,11 +126,15 @@ ul li:last-child {
   padding-bottom: 0;
 }
 
-ul div li.wordsList{
+ul div li.wordsList {
   padding-bottom: 0;
 }
 
-ul .word strong {
+ul li.word{
+  margin-bottom: 0rem;
+}
+
+ul .word .details strong {
   font-size: 2rem;
   color: #989898;
 }
@@ -142,7 +149,7 @@ ul .word i {
   cursor: pointer;
 }
 ul .content {
-  max-height: 15rem;
+  max-height: 20rem;
   overflow-y: auto;
 }
 ul .content::-webkit-scrollbar {
@@ -162,22 +169,31 @@ ul .content::-webkit-scrollbar {
   color: #7e7e7e;
 }
 
-.content .wordsList .list li{
+.content .wordsList .list {
+  display: block;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 0.5rem; */
+}
+
+.content .wordsList .list li {
   display: block;
   margin: 20px 0;
 }
 
-.content .wordsList .list li span{
-  /* margin: 20px 0; */
+.content .wordsList .list li span {
   padding-left: 2rem;
 }
 
-.content .synonyms .list, .content .antonyms .list {
+.content .synonyms .list,
+.content .antonyms .list {
   display: flex;
   flex-wrap: wrap;
 }
 
-.content .synonyms span, .content .antonyms span {
+.content .synonyms span,
+.content .antonyms span {
   cursor: pointer;
   margin-right: 0.25rem;
   text-decoration: underline;
@@ -185,25 +201,73 @@ ul .content::-webkit-scrollbar {
 
 /* Sidebar */
 
-.sidebar{
+.sidebar {
   background: rgb(163, 163, 163);
-  display: block;
-  align-items:center;
-  justify-content:center;
-  min-width: 25%;
-  padding-bottom: 1rem;
-  max-height: inherit;
+  grid-area: sidebar;
+  justify-self: baseline;
+
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: 0fr auto 0fr;
+  grid-template-areas:
+    "sidebar-header"
+    "sidebar-list"
+    "sidebar-download";
+
+  border-radius: 0.3rem;
+  padding: 2rem 2rem;
+  box-shadow: 0.3rem 0.3rem 1.2rem rgba(0, 0, 0, 0.05);
+}
+
+.sidebar header {
+  grid-area: sidebar-header;
+  justify-self: baseline;
+  height: fit-content;
+}
+
+.sidebar .list {
+  grid-area: sidebar-list;
+  justify-self: stretch;
+  max-height: 28rem;
+  min-height: 5rem;
   overflow-y: auto;
+  height: 100%;
 }
 
-.sidebar span{
+.sidebar #downloadBtn {
+  grid-area: sidebar-download;
+  align-items: center;
+  align-self: end;
+  justify-content: center;
+  justify-self: stretch;
+  border-radius: 10%;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  grid-template-rows: auto;
+}
+
+.sidebar .list span {
   background: #fff;
-  display: block;
-  align-items:baseline;
-  justify-content:baseline;
-  margin: 0.5rem 2rem 0.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border-radius: 1rem;
+  margin: 0.25rem;
 }
 
-.sidebar .list::-webkit-scrollbar{
+.sidebar .list::-webkit-scrollbar {
   width: 0rem;
+}
+
+.sidebar #downloadBtn span {
+  float: inherit;
+  justify-self: stretch;
+  margin-left: 1rem;
+  font-size: large;
+}
+
+.sidebar #downloadBtn #downloadIcon {
+  justify-self: end;
+  margin-right: 1rem;
 }

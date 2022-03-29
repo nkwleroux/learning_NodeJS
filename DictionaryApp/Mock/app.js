@@ -1,17 +1,23 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+// var json2xls = require("json2xls");
 
 app.use(express.static("./public"));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+// app.use(json2xls.middleware);
 
-//Not necessary
+var jsonParser = express.json();
+
 app.get("/", (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, "./public/frontPage.html"));
-  // res.status(200).send("Home page");
 });
 
-app.get("/about", (req, res) => {
-  res.status(200).send("About page");
+app.post("/download", jsonParser, (req, res) => {
+  console.log(req.body);
+  // console.log(req.body.word);
+  res.status(200).send(`${req.body.jsonData}`);
 });
 
 app.all("*", (req, res) => {

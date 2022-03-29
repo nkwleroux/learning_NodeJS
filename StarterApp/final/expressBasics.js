@@ -8,7 +8,7 @@ app.use(express.static("./public"));
 
 //Not necessary
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "./navbar-app/indext.html"));
+  res.sendFile(path.resolve(__dirname, "./navbar-app/index.html"));
   res.status(200).send("Home page");
 });
 
