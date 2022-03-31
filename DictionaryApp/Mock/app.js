@@ -1,23 +1,49 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-// var json2xls = require("json2xls");
+
+const { writeFile } = require("fs");
+const util = require("util");
+const writeFilePromise = util.promisify(writeFile);
+
+var json2xls = require("json2xls");
 
 app.use(express.static("./public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-// app.use(json2xls.middleware);
+app.use(json2xls.middleware);
 
 var jsonParser = express.json();
+
+const filePath = path.resolve(__dirname, "./data/searchHistory.xlsx");
+let tempData;
 
 app.get("/", (req, res) => {
   res.status(200).sendFile(path.resolve(__dirname, "./public/frontPage.html"));
 });
 
-app.post("/download", jsonParser, (req, res) => {
-  console.log(req.body);
-  // console.log(req.body.word);
-  res.status(200).send(`${req.body.jsonData}`);
+app.post("/download", jsonParser, async (req, res) => {
+  let data = JSON.stringify(req.body.data);
+  tempData = req.body.data;
+
+  var xls = json2xls(tempData);
+
+  //not exactly what I want. Still need to optimalise and add error handling
+  //The "then" argument is a function that is called when the promise is resolved.
+  //Just that its not used correctly.
+  await writeFilePromise(filePath, xls, "binary")
+    .then(() => {
+      res.status(200).send(`${data}`);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("Error");
+    });
+});
+
+//!BUG - Phonetics column doesnt appear in excel sheet when = "" or undefined.
+app.get("/download", async (req, res) => {
+  res.status(200).xls("data.xlsx", tempData);
 });
 
 app.all("*", (req, res) => {

@@ -1,7 +1,3 @@
-// const { readFile, writeFile } = require("fs");
-// const util = require("util");
-// const writeFilePromise = util.promisify(writeFile);
-
 const wrapper = document.querySelector(".wrapper");
 const searchInput = wrapper.querySelector("input");
 const volume = wrapper.querySelector(".word i");
@@ -18,18 +14,14 @@ let list = [];
 
 //debug (calls onLoad + my own funciton)
 document.addEventListener("DOMContentLoaded", function () {
+  //!debug code start
   if (searchInput.value == undefined || searchInput.value == "") {
-    //Debug only
-    for (let index = 0; index < 15; index++) {
-      let tag = `<span>${index}</span>`;
-      const sidebar = document.querySelector(".sidebar .list");
-      sidebar.insertAdjacentHTML("afterbegin", tag);
-    }
-    apiSearch("set");
-    fetchApi("set");
+    //search("set");
     return;
   }
-  apiSearch(searchInput.value);
+  //!debug code end
+
+  search(searchInput.value);
 });
 
 content.addEventListener("resize", function () {
@@ -55,8 +47,18 @@ function data(result) {
 
   //Phonetics
   let phontetics = "";
-  if (result[0].phonetics[0] != undefined) {
-    phontetics = `${result[0].meanings[0].partOfSpeech}  ${result[0].phonetics[0].text}`;
+  if (
+    result[0].meanings[0].partOfSpeech != "" &&
+    result[0].meanings[0].partOfSpeech != undefined
+  ) {
+    phontetics = `${result[0].meanings[0].partOfSpeech}  `;
+  }
+  if (
+    result[0].phonetics[0] != undefined &&
+    result[0].phonetics[0].text != "" &&
+    result[0].phonetics[0].text != undefined
+  ) {
+    phontetics += `${result[0].phonetics[0].text}`;
   }
   document.querySelector(".word span").innerText = phontetics;
 
@@ -129,7 +131,6 @@ function addLinkedRelatedWords(html, wordsList) {
 
 function search(word) {
   searchInput.value = word;
-  console.log("search");
   apiSearch(word);
 }
 
@@ -181,32 +182,56 @@ removeIcon.addEventListener("click", () => {
   setSidebarHeight();
 });
 
-//!Shit don't touch
-//TODO-FIX
-async function getWordListData(list) {
+function getWordListData(list) {
   let wordListData = [];
 
-  Promise.all(list.map((word, index) => fetchApi(word))).then((response) => {
-    var wordInput = getData(response[0]);
-    wordListData.push(wordInput);
+  list.map((word) => {
+    let result = new Promise((resolve, reject) => {
+      resolve(
+        fetchApi(word)
+          .then((responseJSON) => {
+            var wordInput = getData(responseJSON);
+            return wordInput;
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      );
+    });
+
+    wordListData.push(result);
   });
 
-  return new Promise((resolve, reject) => {
-    resolve(wordListData);
-  });
+  return Promise.all(wordListData);
 }
 
 function getData(result) {
   let wordInput = {
     Word: result[0].word,
     PartOfSpeech: result[0].meanings[0].partOfSpeech,
-    Phonetics: result[0].phonetics[0].text,
-    Meanings: result[0].meanings[0].definitions,
-    Synonyms: result[0].meanings[0].synonyms,
-    Antonyms: result[0].meanings[0].antonyms,
   };
 
+  //Sometimes the array is empty/null so "text" can't be retrieved.
+  if (result[0].phonetics[0] != undefined) {
+    wordInput.Phonetics = result[0].phonetics[0].text;
+  } else {
+    wordInput.Phonetics = "";
+  }
+
+  wordInput.Meanings = result[0].meanings[0].definitions;
+  wordInput.Synonyms = result[0].meanings[0].synonyms;
+  wordInput.Antonyms = result[0].meanings[0].antonyms;
+
+  console.log(wordInput);
+
   return wordInput;
+}
+
+function responseToObject(response) {
+  let parsed = JSON.stringify(response);
+  let object = JSON.parse(parsed);
+
+  return object;
 }
 
 downloadBtn.addEventListener("click", async () => {
@@ -222,54 +247,53 @@ downloadBtn.addEventListener("click", async () => {
   //When data is recieved from the server
   xmlhttp.onreadystatechange = function () {
     if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-      console.log(`${xmlhttp.responseText}`);
-      //window.open("/download");
+      //Debug
+      let result = JSON.parse(xmlhttp.response);
+      result.map((result) => {
+        console.log(`${result.Word}`);
+        // console.log((`${result.PartOfSpeech}`));
+        // console.log((`${result.Phonetics}`));
+        // var parsedMeanings = responseToObject(result.Meanings);
+        // console.log(parsedMeanings);
+        // parsedMeanings.forEach((meaning) => {
+          // let ob = JSON.parse(meaning);
+          // console.log(ob.definition);
+          // console.log(ob.synonyms);
+          // console.log(ob.antonyms);
+          // console.log(ob.example);
+        // });
+
+        // console.log(`${result.Synonyms}`);
+        // console.log(`${result.Antonyms}`);
+      });
+
+      window.open("/download");
     }
   };
 
-  var promiseData = await getWordListData(list);
+  var jsonData = await getWordListData(list);
 
-  //TODO-Here goes wrong
-  console.log(promiseData);
-  console.log(promiseData[0]);
-
-  // promiseData.then((arr) => {
-  //   console.log(promiseData);
-  // });
-  // console.log(JSON.stringify(promiseData));
+  jsonData.map((word) => {
+    let temp = [];
+    word.Meanings.map((meaning) => {
+      var newVal = JSON.stringify(meaning);
+      temp.push(newVal);
+    });
+    word.Meanings = temp;
+  });
+  let dataArray = { data: jsonData };
 
   // JSON encode the data by stringifying it before sending to the server
-  // xmlhttp.send(JSON.stringify(data));
+  // xmlhttp.send(JSON.stringify(jsonData));
+
+  xmlhttp.send(JSON.stringify(dataArray));
 });
-
-//TODO-download file not working
-// const start = async () => {
-//   try {
-//     const first = await readfilePromise(
-//       "./Built-In_modules/content/first.txt",
-//       "utf-8"
-//     );
-//     const second = await readfilePromise(
-//       "./Built-In_modules/content/second.txt",
-//       "utf-8"
-//     );
-//     await writeFilePromise(
-//       "./Built-In_modules/content/test.txt",
-//       `data: ${first} ${second}`
-//     );
-//     // const second = await getText("./Built-In_modules/content/second.txt");
-
-//     console.log(first, second);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 //----------------//
 
 //for "function data"
-//!bit overkill
 //!Prints a list of all info of a word
+//Right now it only prints index 0.
 // let ob = result.map((object) => {
 //   const { word, phonetics, meanings } = object;
 
