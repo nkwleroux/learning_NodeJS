@@ -80,12 +80,13 @@ function data(result) {
   }
   document.querySelector(".word span").innerText = phontetics;
 
+  volume.style.display = "none";
   if (result[0].phonetics[0] != undefined) {
-    volume.style.display = "block";
-    //TODO-audio not working (uri error)
     audio = new Audio(result[0].phonetics[0].audio);
-  } else {
-    volume.style.display = "none";
+
+    audio.addEventListener("canplaythrough", (event) => {
+      volume.style.display = "block";
+    });
   }
 
   //Words

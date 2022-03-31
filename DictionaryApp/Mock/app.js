@@ -27,6 +27,12 @@ app.post("/download", jsonParser, async (req, res) => {
   let data = JSON.stringify(req.body.data);
   tempData = req.body.data;
 
+  await writeFilePromise(
+    path.resolve(__dirname, "./data/searchHistory.json"),
+    `${data}`,
+    "utf-8"
+  );
+
   var xls = json2xls(tempData);
 
   //not exactly what I want. Still need to optimalise and add error handling
@@ -48,7 +54,7 @@ app.get("/download", async (req, res) => {
 });
 
 app.all("*", (req, res) => {
-  res.status(404).send("<h1>Page not found</h1>");
+  res.status(404).sendFile(path.resolve(__dirname, "./public/404.html"));
 });
 
 app.listen(PORT, () => {
