@@ -14,6 +14,12 @@ let list = [];
 
 //debug (calls onLoad + my own funciton)
 document.addEventListener("DOMContentLoaded", function () {
+  var history = sessionStorage.getItem("history");
+  if (history == null) {
+  } else {
+    list = JSON.parse(history);
+  }
+
   //!debug code start
   if (searchInput.value == undefined || searchInput.value == "") {
     //search("set");
@@ -23,6 +29,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
   search(searchInput.value);
 });
+
+// window.onload = () => {
+
+//   // list = localStorage.getItem("history");
+// };
+
+window.onbeforeunload = () => {
+  if (list.length > 0) {
+    console.log(list);
+    sessionStorage.setItem("history", JSON.stringify(list));
+  }
+};
 
 content.addEventListener("resize", function () {
   let height = content.offsetHeight;
@@ -256,11 +274,11 @@ downloadBtn.addEventListener("click", async () => {
         // var parsedMeanings = responseToObject(result.Meanings);
         // console.log(parsedMeanings);
         // parsedMeanings.forEach((meaning) => {
-          // let ob = JSON.parse(meaning);
-          // console.log(ob.definition);
-          // console.log(ob.synonyms);
-          // console.log(ob.antonyms);
-          // console.log(ob.example);
+        // let ob = JSON.parse(meaning);
+        // console.log(ob.definition);
+        // console.log(ob.synonyms);
+        // console.log(ob.antonyms);
+        // console.log(ob.example);
         // });
 
         // console.log(`${result.Synonyms}`);
