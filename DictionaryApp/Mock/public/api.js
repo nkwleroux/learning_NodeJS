@@ -14,11 +14,11 @@ let list = [];
 
 //debug (calls onLoad + my own funciton)
 document.addEventListener("DOMContentLoaded", function () {
-  var history = sessionStorage.getItem("history");
-  if (history == null) {
-  } else {
-    list = JSON.parse(history);
-  }
+  // var history = sessionStorage.getItem("history");
+  // if (history == null) {
+  // } else {
+  //   list = JSON.parse(history);
+  // }
 
   //!debug code start
   if (searchInput.value == undefined || searchInput.value == "") {
@@ -35,12 +35,12 @@ document.addEventListener("DOMContentLoaded", function () {
 //   // list = localStorage.getItem("history");
 // };
 
-window.onbeforeunload = () => {
-  if (list.length > 0) {
-    console.log(list);
-    sessionStorage.setItem("history", JSON.stringify(list));
-  }
-};
+// window.onbeforeunload = () => {
+//   if (list.length > 0) {
+//     console.log(list);
+//     sessionStorage.setItem("history", JSON.stringify(list));
+//   }
+// };
 
 content.addEventListener("resize", function () {
   let height = content.offsetHeight;
