@@ -19,7 +19,7 @@ const filePath = path.resolve(__dirname, "./data/searchHistory.xlsx");
 let tempData;
 
 app.get("/", (req, res) => {
-  res.status(200).sendFile(path.resolve(__dirname, "./public/frontPage.html"));
+  res.status(200).sendFile(path.resolve(__dirname, "./public/index.html"));
 });
 
 app.post("/download", jsonParser, async (req, res) => {
